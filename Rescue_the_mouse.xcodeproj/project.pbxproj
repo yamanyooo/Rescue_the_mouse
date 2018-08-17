@@ -14,6 +14,11 @@
 		4727D5A82122891B00D3CA55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4727D5A62122891B00D3CA55 /* LaunchScreen.storyboard */; };
 		4727D5B32122891B00D3CA55 /* Rescue_the_mouseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4727D5B22122891B00D3CA55 /* Rescue_the_mouseTests.swift */; };
 		4727D5BE2122891B00D3CA55 /* Rescue_the_mouseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4727D5BD2122891B00D3CA55 /* Rescue_the_mouseUITests.swift */; };
+		4727D5CC212557E800D3CA55 /* StageSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4727D5CB212557E800D3CA55 /* StageSelectView.swift */; };
+		4727D5D2212563BE00D3CA55 /* Image in Resources */ = {isa = PBXBuildFile; fileRef = 4727D5D0212563BD00D3CA55 /* Image */; };
+		4727D5D3212563BE00D3CA55 /* Stage in Resources */ = {isa = PBXBuildFile; fileRef = 4727D5D1212563BE00D3CA55 /* Stage */; };
+		4727D5D52125641F00D3CA55 /* Map in Resources */ = {isa = PBXBuildFile; fileRef = 4727D5D42125641E00D3CA55 /* Map */; };
+		4727D5D72125649A00D3CA55 /* Def.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4727D5D62125649A00D3CA55 /* Def.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +52,11 @@
 		4727D5B92122891B00D3CA55 /* Rescue_the_mouseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rescue_the_mouseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4727D5BD2122891B00D3CA55 /* Rescue_the_mouseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rescue_the_mouseUITests.swift; sourceTree = "<group>"; };
 		4727D5BF2122891B00D3CA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4727D5CB212557E800D3CA55 /* StageSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSelectView.swift; sourceTree = "<group>"; };
+		4727D5D0212563BD00D3CA55 /* Image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Image; sourceTree = "<group>"; };
+		4727D5D1212563BE00D3CA55 /* Stage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Stage; sourceTree = "<group>"; };
+		4727D5D42125641E00D3CA55 /* Map */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Map; sourceTree = "<group>"; };
+		4727D5D62125649A00D3CA55 /* Def.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Def.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +87,9 @@
 		4727D5912122891600D3CA55 = {
 			isa = PBXGroup;
 			children = (
+				4727D5D42125641E00D3CA55 /* Map */,
+				4727D5D0212563BD00D3CA55 /* Image */,
+				4727D5D1212563BE00D3CA55 /* Stage */,
 				4727D59C2122891600D3CA55 /* Rescue_the_mouse */,
 				4727D5B12122891B00D3CA55 /* Rescue_the_mouseTests */,
 				4727D5BC2122891B00D3CA55 /* Rescue_the_mouseUITests */,
@@ -97,8 +110,10 @@
 		4727D59C2122891600D3CA55 /* Rescue_the_mouse */ = {
 			isa = PBXGroup;
 			children = (
+				4727D5D62125649A00D3CA55 /* Def.swift */,
 				4727D59D2122891600D3CA55 /* AppDelegate.swift */,
 				4727D59F2122891600D3CA55 /* ViewController.swift */,
+				4727D5CB212557E800D3CA55 /* StageSelectView.swift */,
 				4727D5A12122891600D3CA55 /* Main.storyboard */,
 				4727D5A42122891B00D3CA55 /* Assets.xcassets */,
 				4727D5A62122891B00D3CA55 /* LaunchScreen.storyboard */,
@@ -229,7 +244,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4727D5D2212563BE00D3CA55 /* Image in Resources */,
 				4727D5A82122891B00D3CA55 /* LaunchScreen.storyboard in Resources */,
+				4727D5D3212563BE00D3CA55 /* Stage in Resources */,
+				4727D5D52125641F00D3CA55 /* Map in Resources */,
 				4727D5A52122891B00D3CA55 /* Assets.xcassets in Resources */,
 				4727D5A32122891600D3CA55 /* Main.storyboard in Resources */,
 			);
@@ -258,6 +276,8 @@
 			files = (
 				4727D5A02122891600D3CA55 /* ViewController.swift in Sources */,
 				4727D59E2122891600D3CA55 /* AppDelegate.swift in Sources */,
+				4727D5CC212557E800D3CA55 /* StageSelectView.swift in Sources */,
+				4727D5D72125649A00D3CA55 /* Def.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
