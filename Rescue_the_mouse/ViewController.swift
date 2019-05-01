@@ -48,7 +48,7 @@ class ViewController: UIViewController {
 
         //ゲームスタートボタン
         let gameStartBtn = UIButton(frame: CGRect(x:spaceWidth, y:heightTemp, width:btnWidth, height:btnHeight))
-        gameStartBtn.setImage(UIImage(named:"Image/top/game_start.png"), for:.normal)
+        gameStartBtn.setImage(UIImage(named:"game_start.png"), for:.normal)
         gameStartBtn.imageView?.contentMode = .scaleAspectFit
         gameStartBtn.contentHorizontalAlignment = .fill
         gameStartBtn.contentVerticalAlignment = .fill
