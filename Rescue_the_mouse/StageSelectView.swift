@@ -10,16 +10,24 @@ import UIKit
 import GoogleMobileAds
 
 class StageSelectView: UIViewController,GADBannerViewDelegate{
-    
-    let pieceV: Int = 11
-    let pieceH: Int = 8
-    var bannerView: GADBannerView = GADBannerView()
-    
+
     struct stageSelectMap{
         var background: String
         var map: [[Int]]
         var btn: [[Int]]
     }
+    
+    let pieceV: Int = 11
+    let pieceH: Int = 8
+//    var gameMode: GameMode?
+    var pieceView: [[UIImageView]] = []
+    var pieceImage: [UIImage] = []
+    var stageSelectButton: [StageSelectButton] = []
+    var stageFileName: String = ""
+    var bannerView: GADBannerView = GADBannerView()
+
+    let stgBtnImg = UIImage(named:"stg_btn09.png")!
+    let stgBtnTapImg = UIImage(named:"stg_btn08.png")!
     
     let viewInfo: [stageSelectMap] = [
         stageSelectMap(
@@ -104,23 +112,146 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadPieceImage()
+        createAdMobView()
+
         // Screen Size の取得
         let statusbarHeight = UIApplication.shared.statusBarFrame.height
         let screenWidth = self.view.bounds.width
         let screenHeight = self.view.bounds.height - statusbarHeight - bannerView.frame.height
-        var backgroundView: UIImageView = UIImageView()
+        let backgroundView: UIImageView = UIImageView()
         
         backgroundView.frame = CGRect(x: 0, y: statusbarHeight, width: screenWidth, height: screenHeight)
         backgroundView.image = UIImage(named: viewInfo[0].background)!
         
         self.view.addSubview(backgroundView)
         self.view.sendSubviewToBack(backgroundView)
-        
+
+        let pieceSizeX: CGFloat = screenWidth / CGFloat(pieceH)
+        let pieceSizeY: CGFloat = screenHeight / CGFloat(pieceV + 1)
+    
+        let yOffset: CGFloat = pieceSizeY / 2
+    
         for y in 0..<pieceV{
+            pieceView.append([UIImageView]())
             for x in 0..<pieceH{
+    
+                pieceView[y].append(UIImageView(frame: CGRect(x: CGFloat(x)*pieceSizeX, y: CGFloat(y)*pieceSizeY+statusbarHeight+yOffset, width: pieceSizeX, height: pieceSizeY)))
+                pieceView[y][x].image = pieceImage[viewInfo[0].map[y][x]]
+                
+                if(PieceType.HOUSE.rawValue <= viewInfo[0].map[y][x]){
+                //    pieceView[y][x].frame = CGRectOffset(pieceView[y][x].frame, 0, pieceSizeY / 7)
+                }else{}
+                self.view.addSubview(pieceView[y][x])
+                
+                if(0 != viewInfo[0].btn[y][x]){
+                
+                    stageSelectButton.append(StageSelectButton(frame: pieceView[y][x].frame, num: viewInfo[0].btn[y][x]))
+                    stageSelectButton[stageSelectButton.count - 1].contentMode = UIView.ContentMode.scaleAspectFit
+                
+                    stageSelectButton[stageSelectButton.count - 1].setImage(stgBtnImg, for: UIControl.State.normal)
+                    stageSelectButton[stageSelectButton.count - 1].setImage(stgBtnTapImg, for: UIControl.State.highlighted)
+                
+                    stageSelectButton[stageSelectButton.count - 1].addTarget(self, action: "stgBtnTapInside:", for: .touchUpInside)
+                
+                self.view.addSubview(stageSelectButton[stageSelectButton.count - 1])
+                
+                
+                }else{}
             }
         }
     }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+/*
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
+        if("gameMode"==segue.identifier){
+        
+            gameMode = segue.destinationViewController as! GameMode
+            gameMode!.stageFileName = stageFileName
+        //  gameMode!.stageFileName = "stage_test"
+            gameMode!.delegate = self
+        }
+    }
+*/
+ 
+    func loadPieceImage(){
+        
+        for i in 0..<pieceFileName.count{
+            if(PieceType.NONE.rawValue != i){
+                pieceImage.append(UIImage(named: pieceFileName[i])!)
+            }else{
+                pieceImage.append(UIImage())
+            }
+        }
+    }
+
+    func stgBtnTapInside(sender: AnyObject){
+        let obj = sender as! StageSelectButton
+        var numText: String
+        
+        if(obj.stageNumber < 10){
+            numText = "000" + String(obj.stageNumber)
+        }
+        else if(obj.stageNumber < 100){
+            numText = "00" + String(obj.stageNumber)
+        }
+        else if(obj.stageNumber < 1000){
+            numText = "0" + String(obj.stageNumber)
+        }
+        else{
+            numText = String(obj.stageNumber)
+        }
+        
+        stageFileName = "stage" + numText
+        //        NSLog("%d", obj.stageNumber)
+        
+    //    self.performSegueWithIdentifier("gameMode", sender: self)
+        
+    }
+
+    func createAdMobView(){
+        // AdMob広告設定
+        bannerView = GADBannerView(adSize:kGADAdSizeSmartBannerPortrait)
+        bannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - bannerView.frame.height)
+        bannerView.frame.size = CGSize(width: self.view.frame.width, height: bannerView.frame.height)
+        // AdMobで発行された広告ユニットIDを設定
+        bannerView.adUnitID = adUnitID
+        bannerView.delegate = self
+        bannerView.rootViewController = self
+        let gadRequest:GADRequest = GADRequest()
+        
+        
+        // テスト用の広告を表示する時のみ使用（申請時に削除）
+        switch targetInfo {
+        case .SIMULATOR:
+            // シミュレータ
+            gadRequest.testDevices = [kGADSimulatorID]
+            break
+        case .YAMA_IPHONE:
+            // yamada IPhone実機
+            gadRequest.testDevices = [yamaID]
+            break
+        case .KUDO_IPHONE:
+            // kudo IPhone実機
+            gadRequest.testDevices = [kudoID]
+            break
+        default:
+            break
+        }
+        
+        bannerView.load(gadRequest)
+        self.view.addSubview(bannerView)
+    }
+
+    func reqCloseGameModeMain() {
+    //        self.dismissViewControllerAnimated(true, completion: nil)
+    //        gameMode!.dismissViewControllerAnimated(true, completion: nil)
+    }
+        
 }

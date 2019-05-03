@@ -231,6 +231,7 @@
 		47DC0445227984F60091E9E3 /* attack05.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DC0379227984F60091E9E3 /* attack05.png */; };
 		47DC0446227984F60091E9E3 /* attack04.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DC037A227984F60091E9E3 /* attack04.png */; };
 		47DC0447227984F60091E9E3 /* attack08.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DC037B227984F60091E9E3 /* attack08.png */; };
+		47DC044922798BE40091E9E3 /* StageSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DC044822798BE40091E9E3 /* StageSelectButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -481,6 +482,7 @@
 		47DC0379227984F60091E9E3 /* attack05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attack05.png; sourceTree = "<group>"; };
 		47DC037A227984F60091E9E3 /* attack04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attack04.png; sourceTree = "<group>"; };
 		47DC037B227984F60091E9E3 /* attack08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attack08.png; sourceTree = "<group>"; };
+		47DC044822798BE40091E9E3 /* StageSelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSelectButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -568,6 +570,7 @@
 				4727D59D2122891600D3CA55 /* AppDelegate.swift */,
 				4727D59F2122891600D3CA55 /* ViewController.swift */,
 				4727D5CB212557E800D3CA55 /* StageSelectView.swift */,
+				47DC044822798BE40091E9E3 /* StageSelectButton.swift */,
 				4727D5A12122891600D3CA55 /* Main.storyboard */,
 				4727D5A42122891B00D3CA55 /* Assets.xcassets */,
 				4727D5A62122891B00D3CA55 /* LaunchScreen.storyboard */,
@@ -1257,6 +1260,7 @@
 				4727D59E2122891600D3CA55 /* AppDelegate.swift in Sources */,
 				4727D5CC212557E800D3CA55 /* StageSelectView.swift in Sources */,
 				4727D5D72125649A00D3CA55 /* Def.swift in Sources */,
+				47DC044922798BE40091E9E3 /* StageSelectButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
