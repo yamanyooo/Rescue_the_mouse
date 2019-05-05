@@ -31,10 +31,33 @@
         <!--StageSelectView-->
         <scene sceneID="pmg-fT-nr6">
             <objects>
-                <viewController id="Lfo-gF-lbz" userLabel="StageSelectView" customClass="StageSelectView" customModule="Rescue_the_mouse" sceneMemberID="viewController"/>
+                <viewController id="Lfo-gF-lbz" userLabel="StageSelectView" customClass="StageSelectView" customModule="Rescue_the_mouse" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="G1a-O6-0un" kind="presentation" identifier="gameMode" id="Unu-Sb-HH5"/>
+                    </connections>
+                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BvW-Cc-RWX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1036" y="34"/>
+        </scene>
+        <!--Game Mode-->
+        <scene sceneID="O8j-vf-nMs">
+            <objects>
+                <viewController id="G1a-O6-0un" customClass="GameMode" customModule="Rescue_the_mouse" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Skf-ts-QYo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="tgD-DL-aTM"/>
+                    </view>
+                    <connections>
+                        <segue destination="vsm-Gk-yGX" kind="unwind" identifier="GameModeClose" unwindAction="closeGameModeWithSegue:" id="6Fr-Qv-IIv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xfg-vo-pv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="vsm-Gk-yGX" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1974" y="34"/>
         </scene>
     </scenes>
 </document>

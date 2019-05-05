@@ -19,7 +19,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
     
     let pieceV: Int = 11
     let pieceH: Int = 8
-//    var gameMode: GameMode?
+    var gameMode: GameMode?
     var pieceView: [[UIImageView]] = []
     var pieceImage: [UIImage] = []
     var stageSelectButton: [StageSelectButton] = []
@@ -152,7 +152,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
                     stageSelectButton[stageSelectButton.count - 1].setImage(stgBtnImg, for: UIControl.State.normal)
                     stageSelectButton[stageSelectButton.count - 1].setImage(stgBtnTapImg, for: UIControl.State.highlighted)
                 
-                    stageSelectButton[stageSelectButton.count - 1].addTarget(self, action: "stgBtnTapInside:", for: .touchUpInside)
+                    stageSelectButton[stageSelectButton.count - 1].addTarget(self, action: #selector(stgBtnTapInside), for: UIControl.Event.touchUpInside)
                 
                 self.view.addSubview(stageSelectButton[stageSelectButton.count - 1])
                 
@@ -167,18 +167,18 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
         // Dispose of any resources that can be recreated.
     }
 
-/*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
         if("gameMode"==segue.identifier){
         
-            gameMode = segue.destinationViewController as! GameMode
+            gameMode = segue.destination as? GameMode
             gameMode!.stageFileName = stageFileName
         //  gameMode!.stageFileName = "stage_test"
-            gameMode!.delegate = self
+            gameMode!.delegate = self as? GameModeDelegate
         }
     }
-*/
+
  
     func loadPieceImage(){
         
@@ -191,7 +191,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
         }
     }
 
-    func stgBtnTapInside(sender: AnyObject){
+    @objc func stgBtnTapInside(sender: AnyObject){
         let obj = sender as! StageSelectButton
         var numText: String
         
@@ -211,7 +211,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
         stageFileName = "stage" + numText
         //        NSLog("%d", obj.stageNumber)
         
-    //    self.performSegueWithIdentifier("gameMode", sender: self)
+        self.performSegue(withIdentifier: "gameMode", sender: self)
         
     }
 
@@ -253,5 +253,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
     //        self.dismissViewControllerAnimated(true, completion: nil)
     //        gameMode!.dismissViewControllerAnimated(true, completion: nil)
     }
-        
+
+    @IBAction func closeGameMode(segue: UIStoryboardSegue){}
+
 }
