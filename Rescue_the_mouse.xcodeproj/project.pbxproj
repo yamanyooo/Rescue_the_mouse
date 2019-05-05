@@ -263,6 +263,7 @@
 		47DC0488227C32A50091E9E3 /* GameModeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DC0485227C32A40091E9E3 /* GameModeHeader.swift */; };
 		47DC0489227C32A50091E9E3 /* GameModeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DC0486227C32A50091E9E3 /* GameModeItem.swift */; };
 		47DC048A227C32A50091E9E3 /* GameModeMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DC0487227C32A50091E9E3 /* GameModeMain.swift */; };
+		47DC048C227F12B80091E9E3 /* stage_test.csv in Resources */ = {isa = PBXBuildFile; fileRef = 47DC048B227F12B80091E9E3 /* stage_test.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -545,6 +546,7 @@
 		47DC0485227C32A40091E9E3 /* GameModeHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModeHeader.swift; sourceTree = "<group>"; };
 		47DC0486227C32A50091E9E3 /* GameModeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModeItem.swift; sourceTree = "<group>"; };
 		47DC0487227C32A50091E9E3 /* GameModeMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModeMain.swift; sourceTree = "<group>"; };
+		47DC048B227F12B80091E9E3 /* stage_test.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stage_test.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -995,6 +997,7 @@
 		47DC044A227C2DB60091E9E3 /* Stage */ = {
 			isa = PBXGroup;
 			children = (
+				47DC048B227F12B80091E9E3 /* stage_test.csv */,
 				47DC045C227C2DB60091E9E3 /* stage0001.csv */,
 				47DC0459227C2DB60091E9E3 /* stage0002.csv */,
 				47DC045A227C2DB60091E9E3 /* stage0003.csv */,
@@ -1254,6 +1257,7 @@
 				47DC041F227984F60091E9E3 /* cat_down01.png in Resources */,
 				47DC042E227984F60091E9E3 /* cat_right03.png in Resources */,
 				47DC03BB227984F60091E9E3 /* fall01.png in Resources */,
+				47DC048C227F12B80091E9E3 /* stage_test.csv in Resources */,
 				47DC0394227984F60091E9E3 /* confetti05.png in Resources */,
 				47DC0381227984F60091E9E3 /* failed_mouse01.png in Resources */,
 				47DC03B2227984F60091E9E3 /* curveLD.png in Resources */,

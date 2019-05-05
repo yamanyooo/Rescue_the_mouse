@@ -200,10 +200,16 @@ class GameMode: UIViewController, GADBannerViewDelegate, InfoUsedItemDelegate, N
         return result
         
     }
-    func reqUseItem(){
+    func reqUseItem() -> Int{
+        
+        var itemCntAll :Int = 0
         
         self.itemView!.itemView[self.itemView!.activeItem].itemCnt -= 1
         
+        for i in 0..<self.itemInfo.count{
+            itemCntAll += self.itemView!.itemView[i].itemCnt
+        }
+        return itemCntAll
     }
     
     func exitReq() {

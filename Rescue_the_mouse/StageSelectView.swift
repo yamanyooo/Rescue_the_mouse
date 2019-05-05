@@ -174,7 +174,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
         
             gameMode = segue.destination as? GameMode
             gameMode!.stageFileName = stageFileName
-        //  gameMode!.stageFileName = "stage_test"
+            //gameMode!.stageFileName = "stage_test"
             gameMode!.delegate = self as? GameModeDelegate
         }
     }

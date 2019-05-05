@@ -11,7 +11,7 @@ import UIKit
 
 protocol InfoUsedItemDelegate{
     func getObjIndex()->Int
-    func reqUseItem()
+    func reqUseItem()->Int
     func reqMouseCnt(cnt: Int)
     func gameModeEnd(gameEnd: GameEnd)
 }
@@ -51,6 +51,7 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
     var loadAnimationImg: [[UIImage]] = []
     var timer = Timer()
     var resultCatAndMouseContact: Bool = false
+    var totalItemCnt :Int = 99
     var mouseCntExist: Int = 0{
         didSet{
             delegate?.reqMouseCnt(cnt: mouseCntExist)
@@ -187,7 +188,7 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
                 // アイテム配置成立
                 gameObj[tile.tilePosY][tile.tilePosX] = String(objIndex)
                 objView[tile.tilePosY][tile.tilePosX].image = loadObjImg[objIndex]
-                delegate?.reqUseItem()
+                self.totalItemCnt = (delegate?.reqUseItem())!
                 // 1ターンカウント
                 turnStart(tile: tile)
                 
@@ -198,7 +199,7 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
             
             gameObj[tile.tilePosY][tile.tilePosX] = String(ObjIndex.NONE.rawValue)
             objView[tile.tilePosY][tile.tilePosX].image = nil
-            delegate?.reqUseItem()
+            self.totalItemCnt = (delegate?.reqUseItem())!
             
             animationExe(x: tile.tilePosX, y: tile.tilePosY, ptn: AnimationPtn.USE_BOMB)
 
@@ -396,6 +397,7 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
         let stop = judgeActionStop()
         if(true == stop){
             self.isUserInteractionEnabled = true
+            jdgItemCnt()
         }else{}
     }
     
@@ -807,5 +809,11 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
     func notifyMouseDeath() {
         // ステージ失敗
         self.delegate?.gameModeEnd(gameEnd: GameEnd.STAGE_FAILED)
+    }
+    func jdgItemCnt() {
+        if( 0 >= self.totalItemCnt){
+            // ステージ失敗
+            self.delegate?.gameModeEnd(gameEnd: GameEnd.STAGE_FAILED)
+        }
     }
 }
