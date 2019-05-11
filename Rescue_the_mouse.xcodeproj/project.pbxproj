@@ -630,27 +630,27 @@
 		4727D59C2122891600D3CA55 /* Rescue_the_mouse */ = {
 			isa = PBXGroup;
 			children = (
+				4727D5A92122891B00D3CA55 /* Info.plist */,
+				4727D59D2122891600D3CA55 /* AppDelegate.swift */,
+				4727D5D62125649A00D3CA55 /* Def.swift */,
+				47DC0477227C320F0091E9E3 /* GameEndButton.swift */,
+				47DC0478227C320F0091E9E3 /* GameEndView.swift */,
+				47DC0473227C31A10091E9E3 /* GameMode.swift */,
 				47DC0485227C32A40091E9E3 /* GameModeHeader.swift */,
 				47DC0486227C32A50091E9E3 /* GameModeItem.swift */,
 				47DC0487227C32A50091E9E3 /* GameModeMain.swift */,
-				47DC0477227C320F0091E9E3 /* GameEndButton.swift */,
-				47DC0478227C320F0091E9E3 /* GameEndView.swift */,
 				47DC047A227C320F0091E9E3 /* GameObjectView.swift */,
 				47DC0475227C320E0091E9E3 /* ItemView.swift */,
 				47DC0479227C320F0091E9E3 /* ObjCat.swift */,
 				47DC0476227C320F0091E9E3 /* ObjMouse.swift */,
 				47DC047C227C32100091E9E3 /* ObjView.swift */,
-				47DC047B227C320F0091E9E3 /* TileView.swift */,
-				47DC0473227C31A10091E9E3 /* GameMode.swift */,
-				4727D5D62125649A00D3CA55 /* Def.swift */,
-				4727D59D2122891600D3CA55 /* AppDelegate.swift */,
-				4727D59F2122891600D3CA55 /* ViewController.swift */,
-				4727D5CB212557E800D3CA55 /* StageSelectView.swift */,
 				47DC044822798BE40091E9E3 /* StageSelectButton.swift */,
-				4727D5A12122891600D3CA55 /* Main.storyboard */,
+				4727D5CB212557E800D3CA55 /* StageSelectView.swift */,
+				47DC047B227C320F0091E9E3 /* TileView.swift */,
+				4727D59F2122891600D3CA55 /* ViewController.swift */,
 				4727D5A42122891B00D3CA55 /* Assets.xcassets */,
 				4727D5A62122891B00D3CA55 /* LaunchScreen.storyboard */,
-				4727D5A92122891B00D3CA55 /* Info.plist */,
+				4727D5A12122891600D3CA55 /* Main.storyboard */,
 			);
 			path = Rescue_the_mouse;
 			sourceTree = "<group>";

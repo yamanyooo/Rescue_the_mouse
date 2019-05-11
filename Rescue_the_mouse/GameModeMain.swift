@@ -44,6 +44,8 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
     var tileView = [[TileView]]()
     var objView = [[ObjView]]()
     var gameObj: [[String]] = []
+    var gameObj_pre: [[String]] = []
+    var objText_pre: [[String]] = []
     var diff: [[Bool]] = []
     var objMouse: [ObjMouse] = []
     var objCat: [ObjCat] = []
@@ -69,6 +71,11 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
         drawTile()
         
         gameObj = obj
+        gameObj_pre = obj
+        
+        // appendが面倒なので、とりあえずobjで初期化(関係ないけど)
+        objText_pre = obj
+        
         drawObj()
         
     }
@@ -212,7 +219,7 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
         for y in 0..<v_tile{
             for x in 0..<h_tile{
                 if( (tile.tilePosY != y)
-                    || (tile.tilePosX != x)){
+                 || (tile.tilePosX != x)){
                     if( (ObjIndex.NOODLE_0MIN.rawValue == Int(gameObj[y][x]))
                         || (ObjIndex.NOODLE_1MIN.rawValue == Int(gameObj[y][x]))
                         || (ObjIndex.NOODLE_2MIN.rawValue == Int(gameObj[y][x]))){
@@ -305,6 +312,14 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
             }
         }
 
+        for y in 0..<objText_pre.count{
+            for x in 0..<objText_pre[y].count{
+                objText_pre[y][x] = objView[y][x].text.text ?? ""
+            }
+        }
+        
+        gameObj_pre = gameObj
+        
         for i in 0..<objMouse.count{
             
             objActionExe(obj: objMouse[i])
@@ -424,10 +439,11 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
         switch obj!.destination {
             
         case .NONE:
-            objView[yNext][xNext].image = objView[y][x].image
-            objView[yNext][xNext].text.text = objView[y][x].text.text
-            gameObj[yNext][xNext] = gameObj[y][x]
             
+            objView[yNext][xNext].image = loadObjImg[Int(gameObj_pre[y][x])!]
+            objView[yNext][xNext].text.text = objText_pre[y][x]
+            gameObj[yNext][xNext] = gameObj_pre[y][x]
+
             if(false == diff[y][x]){
                 
                 objView[y][x].image = nil
@@ -453,7 +469,7 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
                 objView[y][x].text.text = ""
                 gameObj[y][x] = String(ObjIndex.NONE.rawValue)
             }
-            obj?.statusAfterAnimation = Status.NOEXIST
+            obj?.statusAfterAnimation = obj?.objType == ObjIndex.MOUSE ? Status.NOEXIST : Status.DEATH
             animationExe(x: xNext, y: yNext, ptn: AnimationPtn.HOLE, obj: obj!)
             break
             
@@ -461,10 +477,10 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
 
             let ptn = judeAnimationPtn(obj: obj!)
             
-            objView[yNext][xNext].image = objView[y][x].image
-            objView[yNext][xNext].text.text = objView[y][x].text.text
-            gameObj[yNext][xNext] = gameObj[y][x]
-            
+            objView[yNext][xNext].image = loadObjImg[Int(gameObj_pre[y][x])!]
+            objView[yNext][xNext].text.text = objText_pre[y][x]
+            gameObj[yNext][xNext] = gameObj_pre[y][x]
+
             if(false == diff[y][x]){
                 objView[y][x].image = nil
                 objView[y][x].text.text = ""
@@ -489,9 +505,9 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
                 objView[yNext][xNext].text.text = ""
                 gameObj[yNext][xNext] = String(ObjIndex.NONE.rawValue)
             }else{
-                objView[yNext][xNext].image = objView[y][x].image
-                objView[yNext][xNext].text.text = objView[y][x].text.text
-                gameObj[yNext][xNext] = gameObj[y][x]
+                objView[yNext][xNext].image = loadObjImg[Int(gameObj_pre[y][x])!]
+                objView[yNext][xNext].text.text = objText_pre[y][x]
+                gameObj[yNext][xNext] = gameObj_pre[y][x]
             }
             if(false == diff[y][x]){
                 objView[y][x].image = nil
@@ -617,6 +633,7 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
                     }else{}
 
                     objView[objMouse[mouseNum].yPoint][objMouse[mouseNum].xPoint].image = nil
+                    objView[objCat[catNum].yPoint][objCat[catNum].xPoint].image = nil
                     objView[objMouse[mouseNum].yPoint][objMouse[mouseNum].xPoint].text.text = ""
                     objView[objCat[catNum].yPoint][objCat[catNum].xPoint].text.text = ""
                     objView[objMouse[mouseNum].yPointNext][objMouse[mouseNum].xPointNext].image = nil
@@ -702,7 +719,7 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
             
             let info = ObjInfo(argView: objView[y][x], argMouse: obj)
             
-            timer = Timer.scheduledTimer(timeInterval: 1.3, target: self, selector: #selector(animationEnd_Food_Toy_Hole), userInfo: info, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(animationEnd_Food_Toy_Hole), userInfo: info, repeats: false)
         }
         else if(AnimationPtn.HOLE == ptn){
             obj.status = Status.NOEXIST
@@ -729,14 +746,19 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
         let obj = userInfo!
         obj.view.stopAnimating()
         obj.view.animation = false
-        if(Status.DEATH == obj.mouse.statusAfterAnimation){
-            
-            obj.view.animationImages = loadAnimationImg[AnimationPtn.Mouse_DEATH.rawValue]
-            obj.view.animationDuration = 2
-            obj.view.animationRepeatCount = 1
-            obj.view.startAnimating()
+        if(Status.DEATH == obj.mouse.statusAfterAnimation)
+         {
+            if( ObjIndex.MOUSE == obj.mouse.objType ){
+                obj.view.animationImages = loadAnimationImg[AnimationPtn.Mouse_DEATH.rawValue]
+                obj.view.animationDuration = 2
+                obj.view.animationRepeatCount = 1
+                obj.view.startAnimating()
 
-            timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(animationEndDelay), userInfo: obj.mouse, repeats: false)
+                timer = Timer.scheduledTimer(timeInterval: 2.2, target: self, selector: #selector(animationEndDelay), userInfo: obj.mouse, repeats: false)
+            }
+            else{
+                obj.mouse.status = Status.DEATH
+            }
 
         }
         else{
@@ -753,7 +775,7 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
 
         obj.status = obj.statusAfterAnimation
         obj.statusAfterAnimation = Status.STOP
-
+        
     }
     
 //    func animationEnd_Trap_MouseAndCat(sender: NSTimer){
@@ -785,7 +807,7 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
         var mouseCnt: Int = 0
         
         for i in 0..<objCat.count{
-            if(Status.NOEXIST == objCat[i].status){
+            if(Status.DEATH == objCat[i].status){
                 notifyMouseDeath()
             }else{}
         }
@@ -811,7 +833,8 @@ class GameModeMain: UIView, TouchActionDelegate, ObjDataDelegate, CAAnimationDel
         self.delegate?.gameModeEnd(gameEnd: GameEnd.STAGE_FAILED)
     }
     func jdgItemCnt() {
-        if( 0 >= self.totalItemCnt){
+        if( (0 >= self.totalItemCnt)
+         && (0 < self.mouseCntExist)){
             // ステージ失敗
             self.delegate?.gameModeEnd(gameEnd: GameEnd.STAGE_FAILED)
         }

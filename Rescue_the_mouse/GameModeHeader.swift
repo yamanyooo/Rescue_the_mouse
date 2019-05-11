@@ -20,7 +20,7 @@ class GameModeHeader: UIImageView{
     let exitImg: UIImage = UIImage(named: "exit.png")!
     let exitTapImg: UIImage = UIImage(named: "exit_tap.png")!
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, stageName: String) {
         
         super.init(frame: frame)
         
@@ -101,7 +101,10 @@ class GameModeHeader: UIImageView{
         stageNameView.textAlignment = NSTextAlignment.center
         stageNameView.textColor = UIColor.black
         stageNameView.font = UIFont(name: "Futura-Medium", size: (ratioStageNameHeight * stageNameHeightPerRatio))
-        stageNameView.text = "STAGE 1"
+        let splitNumbers = (stageName.components(separatedBy: NSCharacterSet.decimalDigits.inverted))
+        let number = splitNumbers.joined()
+        let number2 = Int(number)
+        stageNameView.text = "STAGE " + (number2?.description)!
         self.addSubview(stageNameView)
         
         let imageText = UILabel(frame: imageTextCGRect)

@@ -9,8 +9,8 @@
 import UIKit
 import GoogleMobileAds
 
-protocol GameModeDelegate{
-    func reqCloseGameModeMain()
+protocol GameModeNextDelegate{
+    func reqGameModeNext(nextAction: Action)
 }
 
 struct ItemInfo{
@@ -25,7 +25,7 @@ class GameMode: UIViewController, GADBannerViewDelegate, InfoUsedItemDelegate, N
     var itemInfo: [ItemInfo] = []
     var headerView: GameModeHeader?
     var itemView: GameModeItem?
-    var delegate: GameModeDelegate?
+    var delegate: GameModeNextDelegate?
     var gameViewSize: CGRect?
     var gameEndView: GameEndView?
     
@@ -86,6 +86,10 @@ class GameMode: UIViewController, GADBannerViewDelegate, InfoUsedItemDelegate, N
             // kudo IPhone実機
             gadRequest.testDevices = [kudoID]
             break
+        case .KUMI_IPHONE:
+            // kumi IPhone実機
+            gadRequest.testDevices = [kumiID]
+            break
         default:
             break
         }
@@ -107,7 +111,7 @@ class GameMode: UIViewController, GADBannerViewDelegate, InfoUsedItemDelegate, N
         statusView.backgroundColor = UIColor.white
         self.view.addSubview(statusView)
         
-        headerView = GameModeHeader(frame: CGRect(x: 0, y: CGFloat(heightTemp), width: screenWidth, height: CGFloat(headerHeight)))
+        headerView = GameModeHeader(frame: CGRect(x: 0, y: CGFloat(heightTemp), width: screenWidth, height: CGFloat(headerHeight)),stageName: stageFileName)
         headerView!.delegate = self
         heightTemp += headerHeight
         self.view.addSubview(headerView!)
@@ -257,23 +261,21 @@ class GameMode: UIViewController, GADBannerViewDelegate, InfoUsedItemDelegate, N
         switch action {
         case .STAGE_SELECT:
             
+            gameEndView!.removeFromSuperview()
             self.performSegue(withIdentifier: "GameModeClose", sender: self)
             
             break
             
-        case .NEXT_STAGE:
-            
-            break
-            
-        case .RETRY_STAGE:
+        case .NEXT_STAGE, .RETRY_STAGE:
             
             let subviews = self.view.subviews
             
             for subview in subviews {
                 subview.removeFromSuperview()
             }
-            self.viewDidLoad()
+            self.performSegue(withIdentifier: "GameModeClose", sender: self)
             gameEndView!.removeFromSuperview()
+            self.delegate?.reqGameModeNext(nextAction: action)
             
             break
             

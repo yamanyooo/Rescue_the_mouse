@@ -9,6 +9,11 @@
 import Foundation
 
 class ObjCat: ObjMouse{
+
+    override init(x: Int, y: Int) {
+        super.init(x: x, y: y)
+        objType = ObjIndex.CAT
+    }
     
     override func judgeObj(x: Int, y: Int, wallDetection: Bool)->ObjTarget{
         

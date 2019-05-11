@@ -61,6 +61,7 @@ class ObjMouse: NSObject{
     var targetDistance: Int
     var objCnt: Int
     var delegate: ObjDataDelegate?
+    var objType: ObjIndex
     
     init(x: Int, y: Int) {
         
@@ -74,6 +75,7 @@ class ObjMouse: NSObject{
         targetDirection = Direction.NONE
         targetDistance = 0
         objCnt = 1
+        objType = ObjIndex.MOUSE
     }
     
     func objTargetSearch(direction: Direction, distance: Int, wallDetection: Bool)->(Bool, Bool, Int){

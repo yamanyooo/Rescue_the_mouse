@@ -13,15 +13,18 @@ enum TargetValue{
     case SIMULATOR
     case YAMA_IPHONE
     case KUDO_IPHONE
+    case KUMI_IPHONE
 }
 // AdMob
 let adUnitID: String = "ca-app-pub-1066065675178783/1714655558"
 let yamaID: String = "3e2cd12831eb5f5cfb8cd722647c3783"
 let kudoID: String = "d89e99445013a4ab8079ed007658fd83"
+let kumiID: String = "fbd0a3897fa0cf4c95a3d6c08711e96e"
 
 let targetInfo: TargetValue = TargetValue.SIMULATOR
 //let targetInfo: TargetValue = TargetValue.YAMA_IPHONE
 //let targetInfo: TargetValue = TargetValue.KUDO_IPHONE
+//let targetInfo: TargetValue = TargetValue.KUMI_IPHONE
 
 enum ObjIndex: Int {
     case NONE = 0

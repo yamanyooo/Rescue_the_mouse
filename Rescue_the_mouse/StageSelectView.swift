@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
-class StageSelectView: UIViewController,GADBannerViewDelegate{
+class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelegate{
 
     struct stageSelectMap{
         var background: String
@@ -25,6 +25,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
     var stageSelectButton: [StageSelectButton] = []
     var stageFileName: String = ""
     var bannerView: GADBannerView = GADBannerView()
+    var currentStageNumber: Int = 0
 
     let stgBtnImg = UIImage(named:"stg_btn09.png")!
     let stgBtnTapImg = UIImage(named:"stg_btn08.png")!
@@ -115,6 +116,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
         loadPieceImage()
         createAdMobView()
 
+        self.view.backgroundColor = UIColor.white
         // Screen Size の取得
         let statusbarHeight = UIApplication.shared.statusBarFrame.height
         let screenWidth = self.view.bounds.width
@@ -175,7 +177,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
             gameMode = segue.destination as? GameMode
             gameMode!.stageFileName = stageFileName
             //gameMode!.stageFileName = "stage_test"
-            gameMode!.delegate = self as? GameModeDelegate
+            gameMode!.delegate = self as GameModeNextDelegate
         }
     }
 
@@ -192,27 +194,34 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
     }
 
     @objc func stgBtnTapInside(sender: AnyObject){
+
         let obj = sender as! StageSelectButton
+        currentStageNumber = obj.stageNumber
+        cleateStage()
+    }
+    
+    func cleateStage(){
+        
         var numText: String
         
-        if(obj.stageNumber < 10){
-            numText = "000" + String(obj.stageNumber)
+        if(currentStageNumber < 10){
+            numText = "000" + String(currentStageNumber)
         }
-        else if(obj.stageNumber < 100){
-            numText = "00" + String(obj.stageNumber)
+        else if(currentStageNumber < 100){
+            numText = "00" + String(currentStageNumber)
         }
-        else if(obj.stageNumber < 1000){
-            numText = "0" + String(obj.stageNumber)
+        else if(currentStageNumber < 1000){
+            numText = "0" + String(currentStageNumber)
         }
         else{
-            numText = String(obj.stageNumber)
+            numText = String(currentStageNumber)
         }
         
         stageFileName = "stage" + numText
         //        NSLog("%d", obj.stageNumber)
         
         self.performSegue(withIdentifier: "gameMode", sender: self)
-        
+
     }
 
     func createAdMobView(){
@@ -241,6 +250,10 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
             // kudo IPhone実機
             gadRequest.testDevices = [kudoID]
             break
+        case .KUMI_IPHONE:
+            // kumi IPhone実機
+            gadRequest.testDevices = [kumiID]
+            break
         default:
             break
         }
@@ -249,9 +262,21 @@ class StageSelectView: UIViewController,GADBannerViewDelegate{
         self.view.addSubview(bannerView)
     }
 
-    func reqCloseGameModeMain() {
-    //        self.dismissViewControllerAnimated(true, completion: nil)
-    //        gameMode!.dismissViewControllerAnimated(true, completion: nil)
+    func reqGameModeNext(nextAction: Action) {
+        
+        switch nextAction {
+        case .NEXT_STAGE:
+            currentStageNumber += 1
+            if(20 >= currentStageNumber){
+                cleateStage()
+            }
+            break
+        case .RETRY_STAGE:
+            cleateStage()
+            break
+        default:
+           break
+        }
     }
 
     @IBAction func closeGameMode(segue: UIStoryboardSegue){}
