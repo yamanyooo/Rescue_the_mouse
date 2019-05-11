@@ -104,7 +104,11 @@ class GameModeHeader: UIImageView{
         let splitNumbers = (stageName.components(separatedBy: NSCharacterSet.decimalDigits.inverted))
         let number = splitNumbers.joined()
         let number2 = Int(number)
-        stageNameView.text = "STAGE " + (number2?.description)!
+        if(true == testStage){
+            stageNameView.text = "TEST"
+        }else{
+            stageNameView.text = "STAGE " + (number2?.description)!
+        }
         self.addSubview(stageNameView)
         
         let imageText = UILabel(frame: imageTextCGRect)

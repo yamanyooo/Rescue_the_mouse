@@ -26,6 +26,9 @@ let targetInfo: TargetValue = TargetValue.SIMULATOR
 //let targetInfo: TargetValue = TargetValue.KUDO_IPHONE
 //let targetInfo: TargetValue = TargetValue.KUMI_IPHONE
 
+// trueに設定するとどのステージを選択してもtest用ステージが起動
+let testStage: Bool = false
+
 enum ObjIndex: Int {
     case NONE = 0
     case MOUSE
