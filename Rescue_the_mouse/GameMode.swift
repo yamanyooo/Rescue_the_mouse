@@ -262,7 +262,7 @@ class GameMode: UIViewController, GADBannerViewDelegate, InfoUsedItemDelegate, N
         case .STAGE_SELECT:
             
             gameEndView!.removeFromSuperview()
-            self.performSegue(withIdentifier: "GameModeClose", sender: self)
+            self.dismiss(animated: false, completion: nil)
             
             break
             
@@ -273,10 +273,11 @@ class GameMode: UIViewController, GADBannerViewDelegate, InfoUsedItemDelegate, N
             for subview in subviews {
                 subview.removeFromSuperview()
             }
-            self.performSegue(withIdentifier: "GameModeClose", sender: self)
+//            self.performSegue(withIdentifier: "GameModeClose", sender: self)
             gameEndView!.removeFromSuperview()
+            self.dismiss(animated: false, completion: nil)
             self.delegate?.reqGameModeNext(nextAction: action)
-            
+
             break
             
         case .CANCEL:

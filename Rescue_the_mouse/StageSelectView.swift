@@ -26,6 +26,8 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
     var stageFileName: String = ""
     var bannerView: GADBannerView = GADBannerView()
     var currentStageNumber: Int = 0
+    var viewFrame = CGRect(x:0,y:0,width:0,height:0)
+
 
     let stgBtnImg = UIImage(named:"stg_btn09.png")!
     let stgBtnTapImg = UIImage(named:"stg_btn08.png")!
@@ -109,21 +111,34 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
                                    "junctionLUD.png",
                                    "junctionRUD.png" ,
                                    "house01.png"]
-
+    
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    convenience init(frame: CGRect){
+        self.init(nibName: nil, bundle: nil)
+        viewFrame = frame
+        self.view.frame = frame
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadPieceImage()
-        createAdMobView()
 
         self.view.backgroundColor = UIColor.white
         // Screen Size の取得
-        let statusbarHeight = UIApplication.shared.statusBarFrame.height
-        let screenWidth = self.view.bounds.width
-        let screenHeight = self.view.bounds.height - statusbarHeight - bannerView.frame.height
+        let screenWidth = self.viewFrame.width
+        let screenHeight = self.viewFrame.height
+        
         let backgroundView: UIImageView = UIImageView()
         
-        backgroundView.frame = CGRect(x: 0, y: statusbarHeight, width: screenWidth, height: screenHeight)
+        backgroundView.frame = self.viewFrame
         backgroundView.image = UIImage(named: viewInfo[0].background)!
         
         self.view.addSubview(backgroundView)
@@ -138,11 +153,10 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
             pieceView.append([UIImageView]())
             for x in 0..<pieceH{
     
-                pieceView[y].append(UIImageView(frame: CGRect(x: CGFloat(x)*pieceSizeX, y: CGFloat(y)*pieceSizeY+statusbarHeight+yOffset, width: pieceSizeX, height: pieceSizeY)))
+                pieceView[y].append(UIImageView(frame: CGRect(x: CGFloat(x)*pieceSizeX, y: CGFloat(y)*pieceSizeY+yOffset, width: pieceSizeX, height: pieceSizeY)))
                 pieceView[y][x].image = pieceImage[viewInfo[0].map[y][x]]
                 
                 if(PieceType.HOUSE.rawValue <= viewInfo[0].map[y][x]){
-                //    pieceView[y][x].frame = CGRectOffset(pieceView[y][x].frame, 0, pieceSizeY / 7)
                 }else{}
                 self.view.addSubview(pieceView[y][x])
                 
@@ -169,7 +183,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
         // Dispose of any resources that can be recreated.
     }
 
-
+/*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
         if("gameMode"==segue.identifier){
@@ -182,7 +196,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
             gameMode!.delegate = self as GameModeNextDelegate
         }
     }
-
+*/
  
     func loadPieceImage(){
         
@@ -222,47 +236,16 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
         stageFileName = "stage" + numText
         //        NSLog("%d", obj.stageNumber)
         
-        self.performSegue(withIdentifier: "gameMode", sender: self)
+        // self.performSegue(withIdentifier: "gameMode", sender: self)
+        gameMode = GameMode()
+        gameMode?.delegate = self
+        gameMode?.stageFileName = stageFileName
+        self.present(gameMode!, animated: true)
+
+        
 
     }
 
-    func createAdMobView(){
-        // AdMob広告設定
-        bannerView = GADBannerView(adSize:kGADAdSizeSmartBannerPortrait)
-        bannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - bannerView.frame.height)
-        bannerView.frame.size = CGSize(width: self.view.frame.width, height: bannerView.frame.height)
-        // AdMobで発行された広告ユニットIDを設定
-        bannerView.adUnitID = adUnitID
-        bannerView.delegate = self
-        bannerView.rootViewController = self
-        let gadRequest:GADRequest = GADRequest()
-        
-        
-        // テスト用の広告を表示する時のみ使用（申請時に削除）
-        switch targetInfo {
-        case .SIMULATOR:
-            // シミュレータ
-            gadRequest.testDevices = [kGADSimulatorID]
-            break
-        case .YAMA_IPHONE:
-            // yamada IPhone実機
-            gadRequest.testDevices = [yamaID]
-            break
-        case .KUDO_IPHONE:
-            // kudo IPhone実機
-            gadRequest.testDevices = [kudoID]
-            break
-        case .KUMI_IPHONE:
-            // kumi IPhone実機
-            gadRequest.testDevices = [kumiID]
-            break
-        default:
-            break
-        }
-        
-        bannerView.load(gadRequest)
-        self.view.addSubview(bannerView)
-    }
 
     func reqGameModeNext(nextAction: Action) {
         

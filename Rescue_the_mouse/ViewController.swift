@@ -87,8 +87,13 @@ class ViewController: UIViewController {
     }
     
     @objc func gameStartBtnTapInside(){
-        self.performSegue(withIdentifier: "toStageSelectView", sender: self)
-
+        
+//        self.performSegue(withIdentifier: "toStageSelectView", sender: self)
+ //       let stageSelectPage = StageSelectPage()
+ //       self.present(stageSelectPage, animated: false)
+        let stageSelectMain = StageSelectMain()
+        self.present(stageSelectMain, animated: false)
+        
     }
 
 

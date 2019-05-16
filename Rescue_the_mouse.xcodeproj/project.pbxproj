@@ -28,6 +28,8 @@
 		4727D5CC212557E800D3CA55 /* StageSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4727D5CB212557E800D3CA55 /* StageSelectView.swift */; };
 		4727D5D52125641F00D3CA55 /* Map in Resources */ = {isa = PBXBuildFile; fileRef = 4727D5D42125641E00D3CA55 /* Map */; };
 		4727D5D72125649A00D3CA55 /* Def.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4727D5D62125649A00D3CA55 /* Def.swift */; };
+		475905872289AD76007B43EE /* StageSelectPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475905862289AD76007B43EE /* StageSelectPage.swift */; };
+		47590589228AFED3007B43EE /* StageSelectMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47590588228AFED3007B43EE /* StageSelectMain.swift */; };
 		47DC037C227984F60091E9E3 /* game_start.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DC02A2227984F50091E9E3 /* game_start.png */; };
 		47DC037D227984F60091E9E3 /* cancel_button_tap.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DC02A4227984F50091E9E3 /* cancel_button_tap.png */; };
 		47DC037E227984F60091E9E3 /* GAME_END.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DC02A5227984F50091E9E3 /* GAME_END.png */; };
@@ -311,6 +313,8 @@
 		4727D5CB212557E800D3CA55 /* StageSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSelectView.swift; sourceTree = "<group>"; };
 		4727D5D42125641E00D3CA55 /* Map */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Map; sourceTree = "<group>"; };
 		4727D5D62125649A00D3CA55 /* Def.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Def.swift; sourceTree = "<group>"; };
+		475905862289AD76007B43EE /* StageSelectPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSelectPage.swift; sourceTree = "<group>"; };
+		47590588228AFED3007B43EE /* StageSelectMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSelectMain.swift; sourceTree = "<group>"; };
 		47DC02A2227984F50091E9E3 /* game_start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_start.png; sourceTree = "<group>"; };
 		47DC02A4227984F50091E9E3 /* cancel_button_tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button_tap.png; sourceTree = "<group>"; };
 		47DC02A5227984F50091E9E3 /* GAME_END.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GAME_END.png; sourceTree = "<group>"; };
@@ -645,6 +649,8 @@
 				47DC0476227C320F0091E9E3 /* ObjMouse.swift */,
 				47DC047C227C32100091E9E3 /* ObjView.swift */,
 				47DC044822798BE40091E9E3 /* StageSelectButton.swift */,
+				47590588228AFED3007B43EE /* StageSelectMain.swift */,
+				475905862289AD76007B43EE /* StageSelectPage.swift */,
 				4727D5CB212557E800D3CA55 /* StageSelectView.swift */,
 				47DC047B227C320F0091E9E3 /* TileView.swift */,
 				4727D59F2122891600D3CA55 /* ViewController.swift */,
@@ -1391,10 +1397,12 @@
 				47DC048A227C32A50091E9E3 /* GameModeMain.swift in Sources */,
 				4727D5CC212557E800D3CA55 /* StageSelectView.swift in Sources */,
 				47DC047D227C32100091E9E3 /* ItemView.swift in Sources */,
+				47590589228AFED3007B43EE /* StageSelectMain.swift in Sources */,
 				47DC0484227C32100091E9E3 /* ObjView.swift in Sources */,
 				47DC0489227C32A50091E9E3 /* GameModeItem.swift in Sources */,
 				47DC0488227C32A50091E9E3 /* GameModeHeader.swift in Sources */,
 				47DC047E227C32100091E9E3 /* ObjMouse.swift in Sources */,
+				475905872289AD76007B43EE /* StageSelectPage.swift in Sources */,
 				4727D5D72125649A00D3CA55 /* Def.swift in Sources */,
 				47DC044922798BE40091E9E3 /* StageSelectButton.swift in Sources */,
 			);
