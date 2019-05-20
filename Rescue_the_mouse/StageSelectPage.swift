@@ -11,6 +11,11 @@ import UIKit
 class StageSelectPage: UIPageViewController, UIPageViewControllerDataSource{
     var stageSelectView: [StageSelectView] = []
     var viewFrame = CGRect(x:0,y:0,width:0,height:0)
+    let mapFile: [String] = [
+        "map001",
+        "map002"
+    ]
+
     
     /*    private var beforeIndex: Int = 0
      private var currentIndex: Int? {
@@ -44,10 +49,9 @@ class StageSelectPage: UIPageViewController, UIPageViewControllerDataSource{
         
         dataSource = self as! UIPageViewControllerDataSource
         
-        stageSelectView.append(StageSelectView(frame: viewFrame))
-        stageSelectView.append(StageSelectView(frame: viewFrame))
-        stageSelectView.append(StageSelectView(frame: viewFrame))
-        
+        for fileCnt in 0..<mapFile.count{
+            stageSelectView.append(StageSelectView(frame: viewFrame, mapFileName: mapFile[fileCnt]))
+        }
         setViewControllers(
             [stageSelectView[0]],
             direction: .forward,

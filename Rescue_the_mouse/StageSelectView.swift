@@ -13,6 +13,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
 
     struct stageSelectMap{
         var background: String
+        var house: String
         var map: [[Int]]
         var btn: [[Int]]
     }
@@ -27,12 +28,15 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
     var bannerView: GADBannerView = GADBannerView()
     var currentStageNumber: Int = 0
     var viewFrame = CGRect(x:0,y:0,width:0,height:0)
+    var viewInfo: stageSelectMap = stageSelectMap(background: "", house: "", map: [], btn: [])
+    var mapFileName: String = ""
 
 
     let stgBtnImg = UIImage(named:"stg_btn09.png")!
     let stgBtnTapImg = UIImage(named:"stg_btn08.png")!
     
-    let viewInfo: [stageSelectMap] = [
+//    let viewInfo: [stageSelectMap] = []
+    /*
         stageSelectMap(
             background: "grass.jpg",
             map:
@@ -85,6 +89,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
              [0, 0,33,34,35,36, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0,37,38,39,40, 0, 0]])]
+ */
     
     enum PieceType: Int{
         case NONE = 0
@@ -116,9 +121,10 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
         super.init(nibName: nil, bundle: nil)
     }
     
-    convenience init(frame: CGRect){
+    convenience init(frame: CGRect, mapFileName: String){
         self.init(nibName: nil, bundle: nil)
         viewFrame = frame
+        self.mapFileName = mapFileName
         self.view.frame = frame
     }
     
@@ -130,6 +136,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         loadPieceImage()
+        loadMapFile()
 
         self.view.backgroundColor = UIColor.white
         // Screen Size の取得
@@ -139,7 +146,7 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
         let backgroundView: UIImageView = UIImageView()
         
         backgroundView.frame = self.viewFrame
-        backgroundView.image = UIImage(named: viewInfo[0].background)!
+        backgroundView.image = UIImage(named: viewInfo.background)!
         
         self.view.addSubview(backgroundView)
         self.view.sendSubviewToBack(backgroundView)
@@ -154,15 +161,15 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
             for x in 0..<pieceH{
     
                 pieceView[y].append(UIImageView(frame: CGRect(x: CGFloat(x)*pieceSizeX, y: CGFloat(y)*pieceSizeY+yOffset, width: pieceSizeX, height: pieceSizeY)))
-                pieceView[y][x].image = pieceImage[viewInfo[0].map[y][x]]
+                pieceView[y][x].image = pieceImage[viewInfo.map[y][x]]
                 
-                if(PieceType.HOUSE.rawValue <= viewInfo[0].map[y][x]){
+                if(PieceType.HOUSE.rawValue <= viewInfo.map[y][x]){
                 }else{}
                 self.view.addSubview(pieceView[y][x])
                 
-                if(0 != viewInfo[0].btn[y][x]){
+                if(0 != viewInfo.btn[y][x]){
                 
-                    stageSelectButton.append(StageSelectButton(frame: pieceView[y][x].frame, num: viewInfo[0].btn[y][x]))
+                    stageSelectButton.append(StageSelectButton(frame: pieceView[y][x].frame, num: viewInfo.btn[y][x]))
                     stageSelectButton[stageSelectButton.count - 1].contentMode = UIView.ContentMode.scaleAspectFit
                 
                     stageSelectButton[stageSelectButton.count - 1].setImage(stgBtnImg, for: UIControl.State.normal)
@@ -207,6 +214,42 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
                 pieceImage.append(UIImage())
             }
         }
+    }
+    
+    func loadMapFile(){
+
+        do {
+            var dataList: [String]
+            var dataListCnt: Int = 1
+            //CSVファイルのパスを取得する。
+            let csvPath = Bundle.main.path(forResource: self.mapFileName, ofType: "csv")
+            //CSVファイルのデータを取得する。
+            let csvData = try String(contentsOfFile:csvPath!, encoding:String.Encoding.utf8)
+            //改行区切りでデータを分割して配列に格納する。
+            dataList = csvData.components(separatedBy: "\n")
+                
+            for _ in 0..<pieceV{
+                let data = dataList[dataListCnt].replacingOccurrences(of: " ", with: "").components(separatedBy: ",").compactMap{ Int($0) }
+                viewInfo.map.append(data)
+                dataListCnt += 1
+            }
+            dataListCnt += 1
+                
+            for _ in 0..<pieceV{
+                let data = dataList[dataListCnt].replacingOccurrences(of: " ", with: "").components(separatedBy: ",").compactMap{ Int($0) }
+                viewInfo.btn.append(data)
+                dataListCnt += 1
+            }
+                
+            viewInfo.background = dataList[dataListCnt]
+            dataListCnt += 1
+                
+            viewInfo.house = dataList[dataListCnt]
+
+        } catch {
+            print(error)
+        }
+        
     }
 
     @objc func stgBtnTapInside(sender: AnyObject){
