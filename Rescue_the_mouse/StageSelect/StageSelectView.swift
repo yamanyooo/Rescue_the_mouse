@@ -277,6 +277,11 @@ class StageSelectView: UIViewController,GADBannerViewDelegate,GameModeNextDelega
         }
         
         stageFileName = "stage" + numText
+        
+        if(true == testStage){
+            stageFileName = "stage_test"
+        }
+
         //        NSLog("%d", obj.stageNumber)
         
         // self.performSegue(withIdentifier: "gameMode", sender: self)

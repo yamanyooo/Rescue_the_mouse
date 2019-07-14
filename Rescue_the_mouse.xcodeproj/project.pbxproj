@@ -31,6 +31,9 @@
 		47590589228AFED3007B43EE /* StageSelectMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47590588228AFED3007B43EE /* StageSelectMain.swift */; };
 		4759058C22915660007B43EE /* map001.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4759058B22915660007B43EE /* map001.csv */; };
 		4759058E229156CE007B43EE /* map002.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4759058D229156CE007B43EE /* map002.csv */; };
+		475905912294218F007B43EE /* how_to_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 4759058F2294218F007B43EE /* how_to_play.png */; };
+		475905922294218F007B43EE /* configuration.png in Resources */ = {isa = PBXBuildFile; fileRef = 475905902294218F007B43EE /* configuration.png */; };
+		4759059422C8AD7B007B43EE /* top_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4759059322C8AD7B007B43EE /* top_image.png */; };
 		47DC037C227984F60091E9E3 /* game_start.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DC02A2227984F50091E9E3 /* game_start.png */; };
 		47DC037D227984F60091E9E3 /* cancel_button_tap.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DC02A4227984F50091E9E3 /* cancel_button_tap.png */; };
 		47DC037E227984F60091E9E3 /* GAME_END.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DC02A5227984F50091E9E3 /* GAME_END.png */; };
@@ -317,6 +320,9 @@
 		47590588228AFED3007B43EE /* StageSelectMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSelectMain.swift; sourceTree = "<group>"; };
 		4759058B22915660007B43EE /* map001.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map001.csv; sourceTree = "<group>"; };
 		4759058D229156CE007B43EE /* map002.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map002.csv; sourceTree = "<group>"; };
+		4759058F2294218F007B43EE /* how_to_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = how_to_play.png; sourceTree = "<group>"; };
+		475905902294218F007B43EE /* configuration.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = configuration.png; sourceTree = "<group>"; };
+		4759059322C8AD7B007B43EE /* top_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_image.png; sourceTree = "<group>"; };
 		47DC02A2227984F50091E9E3 /* game_start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_start.png; sourceTree = "<group>"; };
 		47DC02A4227984F50091E9E3 /* cancel_button_tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button_tap.png; sourceTree = "<group>"; };
 		47DC02A5227984F50091E9E3 /* GAME_END.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GAME_END.png; sourceTree = "<group>"; };
@@ -639,22 +645,8 @@
 				4727D5A92122891B00D3CA55 /* Info.plist */,
 				4727D59D2122891600D3CA55 /* AppDelegate.swift */,
 				4727D5D62125649A00D3CA55 /* Def.swift */,
-				47DC0477227C320F0091E9E3 /* GameEndButton.swift */,
-				47DC0478227C320F0091E9E3 /* GameEndView.swift */,
-				47DC0473227C31A10091E9E3 /* GameMode.swift */,
-				47DC0485227C32A40091E9E3 /* GameModeHeader.swift */,
-				47DC0486227C32A50091E9E3 /* GameModeItem.swift */,
-				47DC0487227C32A50091E9E3 /* GameModeMain.swift */,
-				47DC047A227C320F0091E9E3 /* GameObjectView.swift */,
-				47DC0475227C320E0091E9E3 /* ItemView.swift */,
-				47DC0479227C320F0091E9E3 /* ObjCat.swift */,
-				47DC0476227C320F0091E9E3 /* ObjMouse.swift */,
-				47DC047C227C32100091E9E3 /* ObjView.swift */,
-				47DC044822798BE40091E9E3 /* StageSelectButton.swift */,
-				47590588228AFED3007B43EE /* StageSelectMain.swift */,
-				475905862289AD76007B43EE /* StageSelectPage.swift */,
-				4727D5CB212557E800D3CA55 /* StageSelectView.swift */,
-				47DC047B227C320F0091E9E3 /* TileView.swift */,
+				4759059522CBA4F5007B43EE /* GameMode */,
+				4759059622CBA57E007B43EE /* StageSelect */,
 				4727D59F2122891600D3CA55 /* ViewController.swift */,
 				4727D5A42122891B00D3CA55 /* Assets.xcassets */,
 				4727D5A62122891B00D3CA55 /* LaunchScreen.storyboard */,
@@ -690,6 +682,36 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		4759059522CBA4F5007B43EE /* GameMode */ = {
+			isa = PBXGroup;
+			children = (
+				47DC0477227C320F0091E9E3 /* GameEndButton.swift */,
+				47DC0478227C320F0091E9E3 /* GameEndView.swift */,
+				47DC0473227C31A10091E9E3 /* GameMode.swift */,
+				47DC0485227C32A40091E9E3 /* GameModeHeader.swift */,
+				47DC0486227C32A50091E9E3 /* GameModeItem.swift */,
+				47DC0487227C32A50091E9E3 /* GameModeMain.swift */,
+				47DC047A227C320F0091E9E3 /* GameObjectView.swift */,
+				47DC0475227C320E0091E9E3 /* ItemView.swift */,
+				47DC0479227C320F0091E9E3 /* ObjCat.swift */,
+				47DC0476227C320F0091E9E3 /* ObjMouse.swift */,
+				47DC047C227C32100091E9E3 /* ObjView.swift */,
+				47DC047B227C320F0091E9E3 /* TileView.swift */,
+			);
+			path = GameMode;
+			sourceTree = "<group>";
+		};
+		4759059622CBA57E007B43EE /* StageSelect */ = {
+			isa = PBXGroup;
+			children = (
+				47DC044822798BE40091E9E3 /* StageSelectButton.swift */,
+				47590588228AFED3007B43EE /* StageSelectMain.swift */,
+				475905862289AD76007B43EE /* StageSelectPage.swift */,
+				4727D5CB212557E800D3CA55 /* StageSelectView.swift */,
+			);
+			path = StageSelect;
+			sourceTree = "<group>";
+		};
 		47DC02A0227984F50091E9E3 /* Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,7 +737,10 @@
 		47DC02A1227984F50091E9E3 /* top */ = {
 			isa = PBXGroup;
 			children = (
+				4759059322C8AD7B007B43EE /* top_image.png */,
 				47DC02A2227984F50091E9E3 /* game_start.png */,
+				4759058F2294218F007B43EE /* how_to_play.png */,
+				475905902294218F007B43EE /* configuration.png */,
 			);
 			path = top;
 			sourceTree = "<group>";
@@ -923,18 +948,18 @@
 		47DC0339227984F50091E9E3 /* animation_explosion */ = {
 			isa = PBXGroup;
 			children = (
-				47DC033A227984F50091E9E3 /* explosion08.png */,
-				47DC033B227984F60091E9E3 /* explosion09.png */,
-				47DC033C227984F60091E9E3 /* explosion07.png */,
-				47DC033D227984F60091E9E3 /* explosion12.png */,
-				47DC033E227984F60091E9E3 /* explosion06.png */,
-				47DC033F227984F60091E9E3 /* explosion10.png */,
-				47DC0340227984F60091E9E3 /* explosion04.png */,
-				47DC0341227984F60091E9E3 /* explosion05.png */,
-				47DC0342227984F60091E9E3 /* explosion11.png */,
 				47DC0343227984F60091E9E3 /* explosion01.png */,
 				47DC0344227984F60091E9E3 /* explosion02.png */,
 				47DC0345227984F60091E9E3 /* explosion03.png */,
+				47DC0340227984F60091E9E3 /* explosion04.png */,
+				47DC0341227984F60091E9E3 /* explosion05.png */,
+				47DC033E227984F60091E9E3 /* explosion06.png */,
+				47DC033C227984F60091E9E3 /* explosion07.png */,
+				47DC033A227984F50091E9E3 /* explosion08.png */,
+				47DC033B227984F60091E9E3 /* explosion09.png */,
+				47DC033F227984F60091E9E3 /* explosion10.png */,
+				47DC0342227984F60091E9E3 /* explosion11.png */,
+				47DC033D227984F60091E9E3 /* explosion12.png */,
 			);
 			path = animation_explosion;
 			sourceTree = "<group>";
@@ -1223,6 +1248,7 @@
 				47DC03F5227984F60091E9E3 /* mouse_noodle05.png in Resources */,
 				47DC03EE227984F60091E9E3 /* mouse_noodle02.png in Resources */,
 				47DC03F7227984F60091E9E3 /* mouse_left02.png in Resources */,
+				475905912294218F007B43EE /* how_to_play.png in Resources */,
 				47DC0435227984F60091E9E3 /* cat_cheese02.png in Resources */,
 				47DC038A227984F60091E9E3 /* clear_mouse02.png in Resources */,
 				47DC046A227C2DB60091E9E3 /* stage0006.csv in Resources */,
@@ -1249,6 +1275,7 @@
 				47DC03DE227984F60091E9E3 /* noodle_2min.png in Resources */,
 				47DC0408227984F60091E9E3 /* wall.png in Resources */,
 				47DC03FD227984F60091E9E3 /* mouse_cheese02.png in Resources */,
+				475905922294218F007B43EE /* configuration.png in Resources */,
 				47DC0425227984F60091E9E3 /* cat_salami01.png in Resources */,
 				47DC0445227984F60091E9E3 /* attack05.png in Resources */,
 				47DC03E7227984F60091E9E3 /* mouse_salami03.png in Resources */,
@@ -1321,6 +1348,7 @@
 				47DC03CF227984F60091E9E3 /* item_cheese_inactive.png in Resources */,
 				47DC03DC227984F60091E9E3 /* item_salami_inactive_tap.png in Resources */,
 				47DC03FF227984F60091E9E3 /* mouse_cheese05.png in Resources */,
+				4759059422C8AD7B007B43EE /* top_image.png in Resources */,
 				47DC0424227984F60091E9E3 /* cat_down03.png in Resources */,
 				47DC03DF227984F60091E9E3 /* item_noodle_inactive.png in Resources */,
 				47DC0460227C2DB60091E9E3 /* stage0018.csv in Resources */,

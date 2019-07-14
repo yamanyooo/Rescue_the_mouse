@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         let ratioMainHeight: CGFloat = 16
         let ratioBtnHeight: CGFloat = 3
         let ratioSpaceHeight: CGFloat = 1
-        let ratioSumHeight: CGFloat = ratioMainHeight + ratioBtnHeight * 3 + ratioSpaceHeight * 3
+        let ratioSumHeight: CGFloat = ratioMainHeight + ratioBtnHeight * 3 + ratioSpaceHeight * 5
         
         // 各描画パーツの横幅比率の設定
         let ratioBtnWidth: CGFloat = 8
@@ -44,7 +44,15 @@ class ViewController: UIViewController {
         let spaceWidth: CGFloat = ratioSpaceWidth * widthPerRatio
 
         // 描画用縦座標
-        var heightTemp: CGFloat = mainHeight
+        var heightTemp: CGFloat = statusbarHeight + ratioSpaceHeight * 2
+
+        //TOPイメージ
+        let topImage = UIImageView(frame: CGRect(x:spaceWidth/2, y:heightTemp, width:btnWidth + spaceWidth, height:mainHeight))
+        topImage.image = UIImage(named:"top_image.png")
+        topImage.contentMode = .scaleAspectFit
+        self.view.addSubview(topImage)
+        // 描画用縦座標
+        heightTemp += mainHeight
 
         //ゲームスタートボタン
         let gameStartBtn = UIButton(frame: CGRect(x:spaceWidth, y:heightTemp, width:btnWidth, height:btnHeight))
@@ -60,11 +68,11 @@ class ViewController: UIViewController {
         
         //遊び方ボタン
         let howToBtn = UIButton(frame: CGRect(x:spaceWidth, y:heightTemp, width:btnWidth, height:btnHeight))
-//        howToBtn.setImage(UIImage(named:"Image/top/*****.png"), for:.normal)
+        howToBtn.setImage(UIImage(named:"how_to_play.png"), for:.normal)
         howToBtn.imageView?.contentMode = .scaleAspectFit
         howToBtn.contentHorizontalAlignment = .fill
         howToBtn.contentVerticalAlignment = .fill
-        howToBtn.backgroundColor = UIColor.blue
+        gameStartBtn.addTarget(self, action: #selector(howToPlayBtnTapInside), for: .touchUpInside)
         self.view.addSubview(howToBtn)
 
         // 描画用縦座標
@@ -72,11 +80,11 @@ class ViewController: UIViewController {
 
         //設定ボタン
         let configBtn = UIButton(frame: CGRect(x:spaceWidth, y:heightTemp, width:btnWidth, height:btnHeight))
-        //        configBtn.setImage(UIImage(named:"Image/top/*****.png"), for:.normal)
+        configBtn.setImage(UIImage(named:"configuration.png"), for:.normal)
         configBtn.imageView?.contentMode = .scaleAspectFit
         configBtn.contentHorizontalAlignment = .fill
         configBtn.contentVerticalAlignment = .fill
-        configBtn.backgroundColor = UIColor.red
+        gameStartBtn.addTarget(self, action: #selector(configurationBtnTapInside), for: .touchUpInside)
         self.view.addSubview(configBtn)
 
     }
@@ -95,6 +103,15 @@ class ViewController: UIViewController {
         self.present(stageSelectMain, animated: false)
         
     }
+
+    @objc func howToPlayBtnTapInside(){
+        
+    }
+    
+    @objc func configurationBtnTapInside(){
+        
+    }
+
 
 
 }
